@@ -89,7 +89,7 @@ function TuboSenoidal(){
 
     this.getPosicion=function(u,v){
 
-        var radio = 0.25 + 0.05*Math.sin(6*v*2.0*Math.PI);
+        var radio = this.getRadio(v);
         var x=radio*Math.cos(u*2.0*Math.PI);
         var z=radio*Math.sin(u*2.0*Math.PI);
         return [x,v-0.5,z];
@@ -97,7 +97,12 @@ function TuboSenoidal(){
 
     this.getNormal=function(u,v){
         var vector = this.getPosicion(u,v);
+        var radio = this.getRadio(v);
         return [vector[0]/radio, vector[1]/radio, vector[2]/radio];
+    }
+
+    this.getRadio=function(v){
+        return 0.25 + 0.05*Math.sin(6*v*2.0*Math.PI);
     }
 
     this.getCoordenadasTextura=function(u,v){
